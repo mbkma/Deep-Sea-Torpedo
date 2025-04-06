@@ -38,8 +38,6 @@
 
 - **🔴 Enemy Submarines** – Detect and fire at you when in range.
 
-- **🦈 Sharks** – Lurk in the depths and **attack on sight**.
-
 - **🌊 Underwater Currents** – Push your submarine, **forcing constant readjustments**.
 
 - **💣 Limited Health** – Taking too much damage means **game over!**

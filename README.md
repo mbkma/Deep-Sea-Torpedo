@@ -19,7 +19,7 @@
 
 - Navigate through **all underwater areas** without being destroyed.
 
-- Avoid **enemy submarines**, **dangerous sea creatures**, and **hazardous currents**.
+- Avoid **enemy submarines**, **sea creatures**, and **hazardous currents**.
 
 - Use **stealth and torpedoes** to survive.
 

@@ -11,8 +11,9 @@
 | Turn Right    | `D`  |
 | Move Up       | `Shift` |
 | Move Down     | `Ctrl` |
+| Light         | `L` |
 | Fire Torpedo  | `Space` |
-| Aim  |`Mouse` |
+| Aim           | `Mouse` |
 
 ## **🎯 Objective**
 

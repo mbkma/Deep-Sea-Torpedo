@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc8w2j0mypo5w"]
+
+[ext_resource type="Script" uid="uid://cybmbupi44iup" path="res://src/explosion.gd" id="1_bjurg"]
+[ext_resource type="AudioStream" uid="uid://c6aqhl7mffis2" path="res://assets/sounds/explosionCrunch_000.ogg" id="2_faelc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh3fq"]
+albedo_color = Color(1, 0.513726, 0, 1)
+roughness = 0.25
+emission_enabled = true
+emission = Color(0.988235, 0.0509804, 0, 1)
+emission_energy_multiplier = 11.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_bjurg"]
+material = SubResource("StandardMaterial3D_bh3fq")
+size = Vector3(0.01, 0.01, 0.01)
+
+[sub_resource type="Gradient" id="Gradient_faelc"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_bjurg")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.1
+mesh = SubResource("BoxMesh_bjurg")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 1.0
+color_ramp = SubResource("Gradient_faelc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_faelc")

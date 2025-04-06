@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://bpn8ckimlish8"]
+
+[ext_resource type="Script" uid="uid://dx5wm645vpgui" path="res://src/main.gd" id="1_fyndt"]
+[ext_resource type="PackedScene" uid="uid://dd5gx4avjmdo3" path="res://src/floor.tscn" id="2_gh0ne"]
+[ext_resource type="PackedScene" uid="uid://d361lve4gr0i7" path="res://src/player_submarine.tscn" id="2_kmhfv"]
+[ext_resource type="AudioStream" uid="uid://bf8qh5se5cs4r" path="res://assets/sounds/underwater.wav" id="4_3cfgd"]
+[ext_resource type="Script" uid="uid://b8pg7k81jb58" path="res://src/current_area_3d.gd" id="6_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://k18nro86qi5h" path="res://src/enemy_submarine.tscn" id="6_rlaii"]
+[ext_resource type="Script" uid="uid://ciiffmp00poy" path="res://src/fishes.gd" id="7_5mrjc"]
+[ext_resource type="PackedScene" uid="uid://2gg8p207yuq7" path="res://src/fish.tscn" id="7_rlaii"]
+[ext_resource type="Script" uid="uid://djqn6rtou01p4" path="res://src/enemy_spawner.gd" id="9_kf8lf"]
+[ext_resource type="Script" uid="uid://cgit6yia5bx6x" path="res://src/area_spawner.gd" id="10_mgm53"]
+[ext_resource type="PackedScene" uid="uid://bh1pwrdsdrd2f" path="res://src/area.tscn" id="11_uewes"]
+[ext_resource type="PackedScene" uid="uid://b6byrorw3t8gb" path="res://src/hud.tscn" id="12_kqbth"]
+
+[sub_resource type="Environment" id="Environment_gh0ne"]
+background_mode = 1
+background_color = Color(0, 0.193334, 0.494282, 1)
+background_energy_multiplier = 1.95
+ambient_light_source = 2
+tonemap_mode = 3
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.348101, 0.618155, 0.456282, 1)
+fog_sky_affect = 0.168
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.9225
+volumetric_fog_emission = Color(0.151583, 0.30686, 0.598887, 1)
+volumetric_fog_emission_energy = 0.3
+volumetric_fog_length = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rlaii"]
+size = Vector3(10.0769, 7.98328, 10.1405)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_fyndt")
+
+[node name="Hud" parent="." instance=ExtResource("12_kqbth")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.16
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gh0ne")
+
+[node name="PlayerSubmarine" parent="." instance=ExtResource("2_kmhfv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85489, 4.44706)
+
+[node name="EnemySubmarine" parent="." instance=ExtResource("6_rlaii")]
+transform = Transform3D(-0.635809, 0, 0.771847, 0, 1, 0, -0.771847, 0, -0.635809, 0.0557371, 0.633141, -0.467241)
+
+[node name="Floor" parent="." instance=ExtResource("2_gh0ne")]
+metadata/_edit_group_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3cfgd")
+
+[node name="CurrentArea3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.586294, 0)
+script = ExtResource("6_kmhfv")
+strength = 0.01
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CurrentArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024292, 3.49164, 0.0316772)
+shape = SubResource("BoxShape3D_rlaii")
+
+[node name="Fishes" type="Node3D" parent="."]
+script = ExtResource("7_5mrjc")
+fish_scene = ExtResource("7_rlaii")
+spawn_area_size = Vector3(3, 3, 3)
+num_fish = 1000
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+script = ExtResource("9_kf8lf")
+enemy_scene = ExtResource("6_rlaii")
+num_enemies = 100
+
+[node name="AreaSpawner" type="Node3D" parent="." node_paths=PackedStringArray("hud")]
+script = ExtResource("10_mgm53")
+area_scene = ExtResource("11_uewes")
+num_areas = 10
+hud = NodePath("../Hud")
+
+[editable path="Floor"]
+[editable path="Floor/floor"]

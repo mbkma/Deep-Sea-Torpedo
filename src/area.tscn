@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh1pwrdsdrd2f"]
+
+[ext_resource type="Script" uid="uid://bjo44fhq57ws4" path="res://src/area.gd" id="1_bcpj7"]
+[ext_resource type="AudioStream" uid="uid://cw4yoh4fs7cvw" path="res://assets/sounds/forceField_004.ogg" id="2_jhkb7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f53sw"]
+height = 0.037
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcpj7"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.509804)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 3.55
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jhkb7"]
+material = SubResource("StandardMaterial3D_bcpj7")
+height = 0.135
+
+[node name="Area" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_bcpj7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_f53sw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.01, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jhkb7")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_jhkb7")

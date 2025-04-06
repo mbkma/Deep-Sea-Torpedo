@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://k18nro86qi5h"]
+
+[ext_resource type="Script" uid="uid://hqbh8u5ua8ro" path="res://src/enemy_submarine.gd" id="1_3i0t0"]
+[ext_resource type="PackedScene" uid="uid://bn4th2ba0w5bx" path="res://assets/models/submarine/submarine.blend" id="1_o6wq7"]
+[ext_resource type="PackedScene" uid="uid://mq6igxdaohqb" path="res://src/torpedo.tscn" id="2_cd4qv"]
+[ext_resource type="PackedScene" uid="uid://dc8w2j0mypo5w" path="res://src/explosion.tscn" id="3_un6lg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3i0t0"]
+size = Vector3(0.024, 0.0193359, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cd4qv"]
+size = Vector3(0.102, 0.173, 0.433)
+
+[node name="EnemySubmarine" type="CharacterBody3D" groups=["Destroyable", "Submarine"]]
+script = ExtResource("1_3i0t0")
+torpedo_scene = ExtResource("2_cd4qv")
+explosion_effect = ExtResource("3_un6lg")
+
+[node name="Model" parent="." instance=ExtResource("1_o6wq7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3i0t0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 27.5
+near = 0.001
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00738944, -0.0300101)
+spot_range = 0.395
+spot_attenuation = 2.0
+spot_angle = 5.1
+
+[node name="TorpedoSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99727, -0.0738474, 0, 0.0738474, 0.99727, -0.00980719, -0.00815698, -0.0414247)
+
+[node name="SonarArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.295204)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SonarArea"]
+shape = SubResource("BoxShape3D_cd4qv")
+debug_color = Color(0.985106, 0, 0.337054, 0.42)
+
+[editable path="Model"]

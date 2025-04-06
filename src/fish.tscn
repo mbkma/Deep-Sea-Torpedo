@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://2gg8p207yuq7"]
+
+[ext_resource type="PackedScene" uid="uid://c1erdxhlulj00" path="res://assets/models/fish/fish.blend" id="1_2qrrq"]
+[ext_resource type="Script" uid="uid://ci4riengpwuk0" path="res://src/fish.gd" id="1_6v7g5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6v7g5"]
+size = Vector3(0.001, 0.001, 0.001)
+
+[node name="Fish" type="CharacterBody3D" groups=["Destroyable"]]
+script = ExtResource("1_6v7g5")
+
+[node name="fish" parent="." instance=ExtResource("1_2qrrq")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6v7g5")

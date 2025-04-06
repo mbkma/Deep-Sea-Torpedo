@@ -1,5 +1,6 @@
 # **🔱 Deep Sea Torpedo**
 
+This game was developed for the ldjam https://ldjam.com/events/ludum-dare/57/deep-sea-torpedo
 
 ## **🎮 Controls**
 
